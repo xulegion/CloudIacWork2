@@ -4,5 +4,5 @@
 
 
 output "slb"{
-  value = 
+  value = alicloud_slb_load_balancer.slb.address
 }
