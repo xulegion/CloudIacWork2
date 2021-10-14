@@ -14,7 +14,7 @@ resource "alicloud_vswitch" "vsw" {
 # 负载均衡
 resource "alicloud_slb_load_balancer" "slb" {
   load_balancer_name       = "xxn-slb-tf"
-  vswitch_id = alicloud_vswitch.vsw.id
+  vswitch_id               = alicloud_vswitch.vsw.id
   load_balancer_spec       = "slb.s2.small"
 }
 
