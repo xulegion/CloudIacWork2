@@ -56,12 +56,39 @@ resource "alicloud_instance" "instance" {
   }
 }
 
-resource "alicloud_eip_address" "eip" {
-}
+# resource "alicloud_eip_address" "eip" {
+# }
 
-resource "alicloud_eip_association" "eip_asso" {
-  allocation_id = alicloud_eip_address.eip.id
-  instance_id   = alicloud_instance.instance[*].id
-}
+# resource "alicloud_eip_association" "eip_asso" {
+#   allocation_id = alicloud_eip_address.eip.id
+#   instance_id   = alicloud_instance.instance[*].id
+# }
+
+
+module "eip" {
+   source = "./modules/eip"
+ 
+   create               = true
+   name                 = "ecs-eip"
+   description          = "An EIP associated with ECS instance."
+   bandwidth            = 1
+   internet_charge_type = "PayByTraffic"
+   instance_charge_type = "PostPaid"
+   period               = 1
+   resource_group_id    = ""
+   tags = {
+     Env      = "Private"
+     Location = "foo"
+   }
+   # The number of instances created by other modules
+   number_of_computed_instances = 3
+   computed_instances = [
+     {
+       instance_ids  = alicloud_instance.instance[*].id
+       instance_type = "EcsInstance"
+       private_ips   = []
+     }
+   ]
+ }
 
 
