@@ -18,6 +18,48 @@ resource "alicloud_slb_load_balancer" "slb" {
   load_balancer_spec       = "slb.s2.small"
 }
 
+resource "alicloud_slb_listener" "default" {
+  load_balancer_id          = alicloud_slb_load_balancer.slb.id
+  backend_port              = 80
+  frontend_port             = 80
+  protocol                  = "http"
+  bandwidth                 = 10
+  sticky_session            = "on"
+  sticky_session_type       = "insert"
+  cookie_timeout            = 86400
+  cookie                    = "testslblistenercookie"
+  health_check              = "on"
+  health_check_domain       = "ali.com"
+  health_check_uri          = "/cons"
+  health_check_connect_port = 20
+  healthy_threshold         = 8
+  unhealthy_threshold       = 8
+  health_check_timeout      = 8
+  health_check_interval     = 5
+  health_check_http_code    = "http_2xx,http_3xx"
+  x_forwarded_for {
+    retrive_slb_ip = true
+    retrive_slb_id = true
+  }
+  acl_status      = "on"
+  acl_type        = "white"
+  acl_id          = alicloud_slb_acl.default.id
+  request_timeout = 80
+  idle_timeout    = 30
+}
+
+resource "alicloud_slb_acl" "default" {
+  name       = "xxn_slb_acl"
+  entry_list {
+    entry   = "10.10.10.0/24"
+    comment = "first"
+  }
+  entry_list {
+    entry   = "168.10.10.0/24"
+    comment = "second"
+  }
+}
+
 
 # 创建资源安全组
 resource "alicloud_security_group" "group" {
