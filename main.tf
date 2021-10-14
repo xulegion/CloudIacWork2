@@ -38,7 +38,7 @@ resource "alicloud_instance" "instance" {
   security_groups   = alicloud_security_group.group.*.id
 
   instance_type              = "ecs.n2.small"
-  number_of_instances         = var.instance_number 
+  number         = var.instance_number 
   system_disk_category       = "cloud_efficiency"
   system_disk_name           = "xxn_system_disk"
   system_disk_description    = "xxn_system_disk_description"
