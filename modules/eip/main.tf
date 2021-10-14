@@ -78,11 +78,11 @@ provider "alicloud" {
      var.tags,
    )
  }
- resource "alicloud_eip_association" "with_computed" {
-   count = var.create ? var.number_of_computed_instances : 0
+#  resource "alicloud_eip_association" "with_computed" {
+#    count = var.create ? var.number_of_computed_instances : 0
  
-   allocation_id      = alicloud_eip.with_computed[count.index].id
-   instance_id        = lookup(local.computed_instance_list[count.index], "instance_id")
-   instance_type      = lookup(local.computed_instance_list[count.index], "instance_type")
-   private_ip_address = lookup(local.computed_instance_list[count.index], "private_ip_address")
- }
+#    allocation_id      = alicloud_eip.with_computed[count.index].id
+#    instance_id        = lookup(local.computed_instance_list[count.index], "instance_id")
+#    instance_type      = lookup(local.computed_instance_list[count.index], "instance_type")
+#    private_ip_address = lookup(local.computed_instance_list[count.index], "private_ip_address")
+#  }
