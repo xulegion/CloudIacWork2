@@ -51,7 +51,7 @@ resource "alicloud_instance" "instance" {
     size        = 20
     category    = "cloud_efficiency"
     description = "xxn_data_disk"
-    encrypted   = true
+    encrypted   = false
    # kms_key_id  = alicloud_kms_key.key.id
   }
 }
