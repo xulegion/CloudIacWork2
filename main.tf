@@ -8,7 +8,7 @@ resource "alicloud_vpc" "vpc" {
 resource "alicloud_vswitch" "vsw" {
   vpc_id            = alicloud_vpc.vpc.id
   cidr_block        = "172.16.0.0/21"
-  zone_id           = "cn--b"
+  zone_id           = "cn-beijing-b"
 }
 
 # 负载均衡
