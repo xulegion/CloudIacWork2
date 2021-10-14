@@ -143,7 +143,7 @@ module "eip" {
    computed_instances = [
      {
 #        instance_ids  = alicloud_instance.instance[*].id
-       instance_ids  = [alicloud_slb_load_balancer.slb.id]
+       instance_ids  = [alicloud_slb_load_balancer.slb.address]
        instance_type = "EcsInstance"
        private_ips   = []
      }
