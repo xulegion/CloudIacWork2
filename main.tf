@@ -25,11 +25,11 @@ resource "alicloud_security_group" "group" {
   vpc_id      = alicloud_vpc.vpc.id
 }
 
-resource "alicloud_kms_key" "key" {
-  description            = "Hello KMS"
-  pending_window_in_days = "7"
-  key_state              = "Enabled"
-}
+# resource "alicloud_kms_key" "key" {
+#  description            = "Hello KMS"
+#  pending_window_in_days = "7"
+#  key_state              = "Enabled"
+# }
 
 # 创建实例
 resource "alicloud_instance" "instance" {
@@ -52,7 +52,7 @@ resource "alicloud_instance" "instance" {
     category    = "cloud_efficiency"
     description = "xxn_data_disk"
     encrypted   = true
-    kms_key_id  = alicloud_kms_key.key.id
+   # kms_key_id  = alicloud_kms_key.key.id
   }
 }
 
@@ -64,7 +64,4 @@ resource "alicloud_eip_association" "eip_asso" {
   instance_id   = alicloud_instance.instance.*.id
 }
 
-output "eip" {
-  value = alicloud_eip_address.eip.public_ip
-}
 
