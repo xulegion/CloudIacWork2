@@ -82,10 +82,11 @@ module "eip" {
      Location = "foo"
    }
    # The number of instances created by other modules
-   number_of_computed_instances = 3
+   number_of_computed_instances = 1
    computed_instances = [
      {
-       instance_ids  = alicloud_instance.instance[*].id
+#        instance_ids  = alicloud_instance.instance[*].id
+       instance_ids  = alicloud_slb_load_balancer.slb.id
        instance_type = "EcsInstance"
        private_ips   = []
      }
