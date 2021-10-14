@@ -57,6 +57,21 @@ resource "alicloud_instance" "instance" {
   }
 }
 
+resource "alicloud_slb_server_group" "default" {
+  load_balancer_id = alicloud_slb_load_balancer.slb.id
+  name             = "xxn_alicloud_slb_server_group"
+  servers {
+    server_ids = alicloud_instance.instance.*.id
+    port       = 100
+    weight     = 10
+  }
+  servers {
+    server_ids = alicloud_instance.instance.*.id
+    port       = 80
+    weight     = 100
+  }
+}
+
 # resource "alicloud_eip_address" "eip" {
 # }
 
