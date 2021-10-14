@@ -34,7 +34,7 @@ resource "alicloud_security_group" "group" {
 # 创建实例
 resource "alicloud_instance" "instance" {
 
-  availability_zone = "cn-hangzhou-b"
+  availability_zone = "cn-beijing-b"
   security_groups   = alicloud_security_group.group.*.id
 
   instance_type              = "ecs.n2.small"
