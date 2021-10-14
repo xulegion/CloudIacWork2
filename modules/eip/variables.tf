@@ -111,7 +111,7 @@
      instance_ids  = list(string)
      private_ips   = list(string)
    }))
-   default = [2]
+   default = []
  }
  
  variable "number_of_computed_instances" {
